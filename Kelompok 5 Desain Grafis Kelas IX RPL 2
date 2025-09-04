@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelompok 5 - K3 Desain Grafis</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+      background-attachment: fixed;
+      overflow-x: hidden; /* ✅ bisa scroll ke bawah */
+    }
+
+    /* Grid futuristik */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: 
+        linear-gradient(transparent 95%, rgba(0,255,255,0.15) 100%),
+        linear-gradient(90deg, transparent 95%, rgba(0,255,255,0.15) 100%);
+      background-size: 40px 40px;
+      z-index: 0;
+      pointer-events: none;
+      animation: moveGrid 8s linear infinite;
+    }
+
+    @keyframes moveGrid {
+      from { background-position: 0 0, 0 0; }
+      to   { background-position: 40px 40px, 40px 40px; }
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.6);
+      color: cyan;
+      text-align: center;
+      padding: 30px 20px;
+      position: relative;
+      z-index: 3;
+      border-bottom: 2px solid cyan;
+      box-shadow: 0 0 15px cyan;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 32px;
+      text-shadow: 0 0 10px cyan, 0 0 20px cyan;
+      animation: glowText 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowText {
+      from { text-shadow: 0 0 10px cyan, 0 0 20px cyan; }
+      to   { text-shadow: 0 0 20px #00e5ff, 0 0 40px cyan; }
+    }
+
+    header p {
+      color: #b8f7ff;
+      font-size: 16px;
+      margin: 5px 0 0;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      position: relative;
+      z-index: 3;
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid cyan;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0, 255, 255, 0.6);
+      margin-bottom: 20px;
+      padding: 20px;
+      color: #e0f7fa;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 0 20px cyan, 0 0 40px cyan;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #00e5ff;
+      text-shadow: 0 0 8px #00e5ff;
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.6);
+      color: #b8f7ff;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+      border-top: 2px solid cyan;
+      box-shadow: 0 0 15px cyan;
+      position: relative;
+      z-index: 3;
+    }
+
+    /* Canvas */
+    #stars, #lasers {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    #stars { z-index: 1; }
+    #lasers { z-index: 2; }
+
+    /* Tombol audio */
+    #audioControl {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 10;
+    }
+
+    #toggleAudio {
+      background: rgba(0,0,0,0.7);
+      border: 1px solid cyan;
+      color: cyan;
+      padding: 8px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    #toggleAudio:hover {
+      background: cyan;
+      color: black;
+      box-shadow: 0 0 15px cyan;
+    }
+
+    /* Scrollbar Futuristik */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: cyan;
+      border-radius: 10px;
+      box-shadow: 0 0 10px cyan, 0 0 20px cyan;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00e5ff;
+      box-shadow: 0 0 15px #00e5ff, 0 0 30px cyan;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Canvas -->
+  <canvas id="stars"></canvas>
+  <canvas id="lasers"></canvas>
+
+  <!-- Header -->
+  <header>
+    <h1>Kelompok 5</h1>
+    <p>Keutamaan Keselamatan dan Kesehatan Kerja (K3) dalam Desain Grafis</p>
+  </header>
+
+  <!-- Konten -->
+  <main>
+    <div class="card">
+      <h2>a. Posisi dan Sikap Kerja</h2>
+      <p>
+        Desainer grafis biasanya bekerja lama di depan komputer. Posisi duduk harus ergonomis agar tidak menimbulkan nyeri punggung, leher, atau bahu. 
+        Penggunaan kursi dengan sandaran punggung dan penyesuaian tinggi meja serta layar komputer penting untuk mencegah gangguan otot dan tulang 
+        (musculoskeletal disorder).
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>b. Pakaian Kerja</h2>
+      <p>
+        Pakaian kerja harus rapi dan nyaman, tidak mengganggu gerakan saat bekerja. 
+        Jika bekerja di studio dengan alat pemotong, printer, atau peralatan pendukung lainnya, sebaiknya menggunakan pakaian yang tidak longgar agar tidak tersangkut alat.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>c. Jam Kerja</h2>
+      <p>
+        Desainer sering menghadapi deadline, namun jam kerja yang terlalu panjang bisa menurunkan konsentrasi dan memicu stres. 
+        K3 menekankan perlunya pengaturan jam kerja yang seimbang serta pemberian waktu istirahat yang cukup agar kesehatan mata, pikiran, dan tubuh tetap terjaga.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>d. Kerja Tim</h2>
+      <p>
+        Dalam tim desain, komunikasi yang baik mencegah kesalahpahaman yang dapat menimbulkan konflik atau stres kerja. 
+        K3 juga mencakup keselamatan psikologis, artinya setiap anggota tim merasa aman, nyaman, dan dihargai saat bekerja bersama.
+      </p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Kelompok 5 | Desain Grafis & K3</p>
+  </footer>
+
+  <!-- Audio Control -->
+  <div id="audioControl">
+    <button id="toggleAudio">🔊 Hidupkan</button>
+  </div>
+  <audio id="bgAudio" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio.
+  </audio>
+
+  <script>
+    /* Bintang */
+    const canvasStars = document.getElementById('stars');
+    const ctxStars = canvasStars.getContext('2d');
+    let stars = [];
+    const starCount = 100;
+
+    function resizeStars() {
+      canvasStars.width = window.innerWidth;
+      canvasStars.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeStars);
+    resizeStars();
+
+    for (let i = 0; i < starCount; i++) {
+      stars.push({
+        x: Math.random() * canvasStars.width,
+        y: Math.random() * canvasStars.height,
+        radius: Math.random() * 2,
+        speed: 0.2 + Math.random() * 0.5
+      });
+    }
+
+    function animateStars() {
+      ctxStars.clearRect(0, 0, canvasStars.width, canvasStars.height);
+      ctxStars.fillStyle = "cyan";
+      stars.forEach(star => {
+        ctxStars.beginPath();
+        ctxStars.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctxStars.fill();
+        star.y += star.speed;
+        if (star.y > canvasStars.height) {
+          star.y = 0;
+          star.x = Math.random() * canvasStars.width;
+        }
+      });
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
+
+    /* Laser */
+    const canvasLasers = document.getElementById('lasers');
+    const ctxLasers = canvasLasers.getContext('2d');
+    let lasers = [];
+    const laserCount = 10;
+
+    function resizeLasers() {
+      canvasLasers.width = window.innerWidth;
+      canvasLasers.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeLasers);
+    resizeLasers();
+
+    function createLaser() {
+      return {
+        x: Math.random() * canvasLasers.width,
+        y: -50,
+        length: 200 + Math.random() * 200,
+        speed: 2 + Math.random() * 3,
+        alpha: 0.4 + Math.random() * 0.6
+      };
+    }
+
+    for (let i = 0; i < laserCount; i++) {
+      lasers.push(createLaser());
+    }
+
+    function animateLasers() {
+      ctxLasers.clearRect(0, 0, canvasLasers.width, canvasLasers.height);
+      lasers.forEach(laser => {
+        const gradient = ctxLasers.createLinearGradient(laser.x, laser.y, laser.x, laser.y + laser.length);
+        gradient.addColorStop(0, `rgba(0,255,255,${laser.alpha})`);
+        gradient.addColorStop(1, `rgba(0,255,255,0)`);
+        ctxLasers.strokeStyle = gradient;
+        ctxLasers.lineWidth = 2;
+        ctxLasers.beginPath();
+        ctxLasers.moveTo(laser.x, laser.y);
+        ctxLasers.lineTo(laser.x, laser.y + laser.length);
+        ctxLasers.stroke();
+
+        laser.y += laser.speed;
+        if (laser.y > canvasLasers.height) {
+          Object.assign(laser, createLaser());
+        }
+      });
+      requestAnimationFrame(animateLasers);
+    }
+    animateLasers();
+
+    /* Audio */
+    const bgAudio = document.getElementById("bgAudio");
+    const toggleBtn = document.getElementById("toggleAudio");
+    let isPlaying = false;
+
+    toggleBtn.addEventListener("click", () => {
+      if (!isPlaying) {
+        bgAudio.play();
+        toggleBtn.textContent = "🔇 Mute";
+      } else {
+        bgAudio.pause();
+        toggleBtn.textContent = "🔊 Hidupkan";
+      }
+      isPlaying = !isPlaying;
+    });
+  </script>
+
+</body>
+</html>
